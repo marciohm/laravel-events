@@ -18,7 +18,7 @@ class CheckStockMinListener
         $product = $event->getProduct();
 
         if ($product->stock < $product->stock_max * 0.10) {
-            \Mail::to('marciohm@gmail.com')->send(new StockLowerMin($product));
+            \Mail::to('marciohm@gmail.com')->queue(new StockLowerMin($product));
         }
     }
 }

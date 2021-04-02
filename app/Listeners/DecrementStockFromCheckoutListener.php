@@ -2,21 +2,22 @@
 
 namespace App\Listeners;
 
-use App\Events\StockOutputCreated;
+use App\Events\OrderProductCreated;
 use App\Stock\DecrementStocks;
 
-class DecrementStockListener
+class DecrementStockFromCheckoutListener
 {
     use DecrementStocks;
+
     /**
      * Handle the event.
      *
-     * @param  StockOutputCreated  $event
+     * @param  OrderProductCreated  $event
      * @return void
      */
-    public function handle(StockOutputCreated $event)
+    public function handle(OrderProductCreated $event)
     {
-        $output = $event->getOutput();
+        $output = $event->getProduct();
         $product = $output->product;
         $this->decrement($product, $output->quantity);
     }
